@@ -1,61 +1,26 @@
-This project is a Cache Memory Simulator developed in C++ for the subject of Computer Architecture. The simulator demonstrates how cache memory works in modern computer systems and helps students understand memory hierarchy, cache hits, cache misses, and different mapping techniques.
+#include <iostream>
+using namespace std;
 
-The simulator supports:
+int main() {
+    int cache[4] = {-1, -1, -1, -1};
+    int memory[] = {1, 2, 3, 1, 4, 2, 5};
+    int hits = 0, misses = 0;
 
-Direct Mapping
+    for (int i = 0; i < 7; i++) {
+        int index = memory[i] % 4;
 
-Fully Associative Mapping
+        if (cache[index] == memory[i]) {
+            hits++;
+            cout << "Hit: " << memory[i] << endl;
+        } else {
+            misses++;
+            cache[index] = memory[i];
+            cout << "Miss: " << memory[i] << endl;
+        }
+    }
 
-Set Associative Mapping
+    cout << "\nTotal Hits: " << hits << endl;
+    cout << "Total Misses: " << misses << endl;
 
-FIFO Replacement Policy
-
-LRU Replacement Policy
-
-Cache Hit and Miss Calculation
-
-Memory Address Simulation
-
-This project is suitable for:
-
-Computer Architecture course assignments
-
-Operating Systems and Memory Management studies
-
-GitHub portfolio projects
-
-Educational demonstrations
-
-Features
-
-Direct Mapping
-
-Each memory block maps to exactly one cache line.
-
-Fully Associative Mapping
-
-Any memory block can be stored in any cache line.
-
-Set Associative Mapping
-
-Cache is divided into sets where each block can be stored within a specific set.
-
-Replacement Policies
-
-FIFO (First In First Out)
-
-LRU (Least Recently Used)
-
-Performance Statistics
-
-The simulator calculates:
-
-Total memory accesses
-
-Cache hits
-
-Cache misses
-
-Hit ratio
-
-Miss ratio
+    return 0;
+}
